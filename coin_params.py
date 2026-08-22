@@ -77,8 +77,20 @@ DEFAULT_TESTNET_HTTP = 19334
 PUBKEY_ADDRESS_VERSION = 0x17           # produces 'A' prefix in Base58Check
 
 # ---------------------------------------------------------------------------
-# Misc
+# Seed nodes — hard-coded bootstrap peers
+# Node baru akan otomatis connect ke seed ini saat pertama kali join network
+# Format: "host:port"
 # ---------------------------------------------------------------------------
+SEED_NODES = {
+    "mainnet": [
+        # Tambahkan IP VPS kamu di sini setelah deploy
+        # Contoh: "125.166.0.117:9333",
+    ],
+    "testnet": [
+        # Contoh: "125.166.0.117:19333",
+    ],
+    "regtest": [],
+}
 COINBASE_MATURITY   = 100               # blocks before coinbase can be spent
 MAX_BLOCK_SIZE      = 1_000_000         # bytes (1 MB)
 MAX_TX_SIZE         = 100_000           # bytes (100 KB)

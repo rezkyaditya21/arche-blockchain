@@ -73,9 +73,31 @@ Address     : Base58Check, prefix "A"
 ### Web Explorer
 Live block/transaction/address browser with auto-refresh, search, and mempool view.
 
+## Join the Network
+
+Want to run a node and start mining ARC?
+
+```bash
+# 1. Clone
+git clone https://github.com/rezkyaditya21/arche-blockchain.git
+cd arche-blockchain
+
+# 2. Install
+pip install -r requirements.txt
+
+# 3. Create wallet
+python -m wallet.cli_wallet create --base58
+
+# 4. Run node & mine
+python -m node.node --data ./arc-data --port 9333 --http-port 9334 \
+  --difficulty 1 --mine --miner <YOUR_ADDRESS> --network testnet
+```
+
+Full guide: **[INSTALL.md](INSTALL.md)**
+
 ---
 
-## Quick Start
+
 
 ### 1. Install dependencies
 ```bash

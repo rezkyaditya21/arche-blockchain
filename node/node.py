@@ -17,6 +17,7 @@ from node.network import get_network, set_network, NETWORKS
 from coin_params import (
     COIN_NAME, COIN_TICKER, INITIAL_SUBSIDY, block_subsidy,
     DEFAULT_P2P_PORT, DEFAULT_HTTP_PORT, MAX_MEMPOOL_SIZE,
+    SEED_NODES,
 )
 
 log = logging.getLogger(__name__)
@@ -79,6 +80,25 @@ class Node:
         if self._http_app is not None:
             threading.Thread(target=self._run_http, daemon=True, name="node-http").start()
         log.info("[%s] Node started  height=%d  tip=%s", COIN_NAME, self.chain.height, self.chain.tip or "(none)")
+        # Auto-connect to seed nodes
+        self._connect_seeds()
+
+    def _connect_seeds(self) -> None:
+        """Connect to hard-coded seed nodes on startup."""
+        seeds = SEED_NODES.get(self.network_params.name, [])
+        if not seeds:
+            return
+        log.info("[%s] Connecting to %d seed node(s)...", COIN_NAME, len(seeds))
+        for seed in seeds:
+            try:
+                host, port = seed.rsplit(":", 1)
+                # Don't connect to ourselves
+                if host == self.host and int(port) == self.port:
+                    continue
+                self.connect_peer(host, int(port))
+                log.info("Seed peer added: %s", seed)
+            except Exception as e:
+                log.warning("Failed to add seed %s: %s", seed, e)
 
     def connect_peer(self, host: str, port: int) -> None:
         self.client.add_peer(host, port)
