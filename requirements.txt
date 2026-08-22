@@ -1,0 +1,24 @@
+# ---------------------------------------------------------------------------
+# Core runtime dependencies — pinned to exact versions for reproducibility
+# ---------------------------------------------------------------------------
+
+# libsecp256k1 Python binding (replaces pure-Python ecdsa — no timing side-channel)
+coincurve==20.0.0
+
+# AES-256-GCM encrypted wallet storage
+cryptography==43.0.3
+
+# LevelDB storage backend (falls back to JSON if unavailable)
+plyvel==1.5.1
+
+# HTTP framework
+Flask==3.0.3
+
+# Production WSGI server (use instead of Flask dev server)
+waitress==3.0.0
+
+# HTTP client (wallet CLI)
+requests==2.32.3
+
+# Type hints backport (Python < 3.11)
+typing-extensions==4.12.2

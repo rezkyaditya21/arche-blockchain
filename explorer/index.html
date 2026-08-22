@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCHE Explorer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="logo-arc">ARC</span>
+      <span class="logo-he">HE</span>
+      <span class="nav-sub">Explorer</span>
+    </div>
+    <div class="nav-search">
+      <input id="searchInput" type="text"
+             placeholder="Search block height, txid, or address…"
+             autocomplete="off" />
+      <button id="searchBtn">Search</button>
+    </div>
+    <div class="nav-network">
+      <span id="networkBadge" class="badge badge-testnet">testnet</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO STATS ──────────────────────────────────── -->
+<section class="hero">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Block Height</div>
+      <div class="stat-value" id="statHeight">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Latest Block Hash</div>
+      <div class="stat-value hash-short" id="statTip">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Block Reward</div>
+      <div class="stat-value" id="statReward">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Max Supply</div>
+      <div class="stat-value" id="statSupply">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Mempool</div>
+      <div class="stat-value" id="statMempool">— tx</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Peers</div>
+      <div class="stat-value" id="statPeers">—</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MAIN CONTENT ────────────────────────────────── -->
+<main class="container">
+
+  <!-- Result panel (shown on search / click) -->
+  <section id="resultPanel" class="panel hidden">
+    <div class="panel-header">
+      <span id="resultTitle">Result</span>
+      <button class="close-btn" onclick="closeResult()">✕</button>
+    </div>
+    <div id="resultBody"></div>
+  </section>
+
+  <!-- Latest blocks -->
+  <section class="panel">
+    <div class="panel-header">
+      <span>Latest Blocks</span>
+      <button class="btn-small" onclick="loadBlocks()">Refresh</button>
+    </div>
+    <div class="table-wrap">
+      <table id="blocksTable">
+        <thead>
+          <tr>
+            <th>Height</th>
+            <th>Hash</th>
+            <th>Time</th>
+            <th>Txs</th>
+            <th>Bits</th>
+          </tr>
+        </thead>
+        <tbody id="blocksBody">
+          <tr><td colspan="5" class="loading">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <button id="prevPage" onclick="changePage(-1)">← Prev</button>
+      <span id="pageInfo">Page 1</span>
+      <button id="nextPage" onclick="changePage(1)">Next →</button>
+    </div>
+  </section>
+
+  <!-- Mempool -->
+  <section class="panel">
+    <div class="panel-header">
+      <span>Mempool</span>
+      <button class="btn-small" onclick="loadMempool()">Refresh</button>
+    </div>
+    <div class="table-wrap">
+      <table id="mempoolTable">
+        <thead>
+          <tr>
+            <th>Txid</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Fee (est.)</th>
+          </tr>
+        </thead>
+        <tbody id="mempoolBody">
+          <tr><td colspan="4" class="loading">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─── FOOTER ──────────────────────────────────────── -->
+<footer class="footer">
+  ARCHE (ARC) Explorer &nbsp;·&nbsp; <span id="footerTime"></span>
+  &nbsp;·&nbsp; <a href="https://github.com/" target="_blank">Source</a>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

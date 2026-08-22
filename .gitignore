@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Testnet / chain data (contains private keys and chain state)
+testnet/
+arc-data/
+node-data/
+*.json.tmp
+
+# Wallets (NEVER commit private keys)
+~/.arc_wallet/
+*.wallet.json
+
+# pytest cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# LevelDB
+leveldb/
