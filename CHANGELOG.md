@@ -6,8 +6,8 @@
 
 ### Blockchain Core
 - UTXO model persisted to LevelDB / crash-safe JSON store
-- double-SHA256 PoW with 80-byte binary header
-- ARCHE block header: 80-byte fixed binary format
+- double-SHA256 Proof of Work with fixed 80-byte binary block header
+- ARCHE compact target (nBits) encoding for difficulty
 - Difficulty retarget every 2016 blocks (±4x clamp)
 - Coinbase maturity: 100-block lockup enforced at consensus level
 - Fork/reorg: cumulative chain-work selection with UTXO rollback

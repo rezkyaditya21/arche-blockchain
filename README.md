@@ -10,60 +10,60 @@
 <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
 <img src="https://img.shields.io/badge/Network-Testnet%20Ready-f59e0b?style=for-the-badge" />
 
-**ARCHE adalah blockchain yang dibangun untuk satu tujuan:**
-**menjadikan kecerdasan buatan dapat diakses, dapat diverifikasi, dan dapat dibayar oleh siapapun.**
+**ARCHE is a blockchain built for one purpose:**
+**making artificial intelligence accessible, verifiable, and payable by anyone.**
 
-[Mulai](#quick-start) · [Bergabung](#join-the-network) · [Fitur](#features) · [Arsitektur](#architecture) · [Status](#project-status) · [Roadmap](#roadmap)
+[Quick Start](#quick-start) · [Join Network](#join-the-network) · [Features](#features) · [Architecture](#architecture) · [Status](#project-status) · [Roadmap](#roadmap)
 
 </div>
 
 ---
 
-## Apa itu ARCHE?
+## What is ARCHE?
 
-ARCHE adalah blockchain yang dibangun dari nol — bukan fork, bukan modifikasi proyek lain.
+ARCHE is a blockchain built from scratch — not a fork, not a modification of any existing project.
 
-Di atas fondasi UTXO + Proof of Work yang terbukti aman, ARCHE menambahkan sesuatu yang belum ada sebelumnya: **native AI economy layer**. ARC adalah mata uang untuk membayar komputasi AI, agent otonom, verifikasi hasil model, dan kontrak pintar berbasis AI.
+On top of a proven UTXO + Proof of Work foundation, ARCHE adds something that did not exist before: a **native AI economy layer**. ARC is the currency for paying AI computation, autonomous agents, model verification, and AI-condition smart contracts.
 
-Visi ARCHE adalah dunia di mana:
-- Siapapun bisa membayar tugas AI tanpa perantara
-- Mesin bisa bertransaksi langsung dengan mesin lain menggunakan ARC
-- Hasil komputasi AI bisa diverifikasi secara kriptografis
-- Tidak ada satu pihak pun yang memegang kendali atas network
+The vision of ARCHE is a world where:
+- Anyone can pay for AI computation without intermediaries
+- Machines can transact directly with other machines using ARC
+- AI computation results can be cryptographically verified
+- No single party controls the network
 
 ```
-Nama      : ARCHE
+Name      : ARCHE
 Ticker    : ARC
-Supply    : 50,000,000 ARC (tetap, tidak bisa ditambah)
-Reward    : 50 ARC/block → halving setiap 500,000 block
-Block time: 2 menit (target)
-Algoritma : double-SHA256 Proof of Work
-Alamat    : Base58Check, awalan "A"
+Supply    : 50,000,000 ARC (fixed, cannot be increased)
+Reward    : 50 ARC/block → halving every 500,000 blocks
+Block time: 2 minutes (target)
+Algorithm : double-SHA256 Proof of Work
+Address   : Base58Check, prefix "A"
 ```
 
 ---
 
-## Mengapa ARCHE?
+## Why ARCHE?
 
-| Masalah | Solusi ARCHE |
-|---------|-------------|
-| AI computation mahal dan terpusat | Siapapun bisa jadi worker, harga ditentukan pasar |
-| Tidak ada cara verifikasi hasil AI | 5-level verification layer on-chain |
-| Agent AI tidak punya identitas ekonomi | Agent registry + agent wallet native |
-| Smart contract tidak bisa berinteraksi dengan AI | AI-condition smart contracts |
-| Pembayaran AI harus lewat platform terpusat | ARC escrow langsung di protokol |
+| Problem | ARCHE Solution |
+|---------|----------------|
+| AI computation is expensive and centralized | Anyone can be a worker, price set by market |
+| No standard way to verify AI results | 5-level on-chain verification layer |
+| AI agents have no economic identity | Native agent registry + agent wallet |
+| Smart contracts cannot interact with AI | AI-condition smart contracts |
+| AI payments must go through centralized platforms | ARC escrow built into the protocol |
 
 ---
 
 ## Project Status
 
-> **Stage saat ini: Private Testnet Ready**
-> Network berjalan secara lokal. Deployment ke server publik adalah milestone berikutnya.
+> **Current stage: Private Testnet Ready**
+> The network runs locally. Deployment to a public server is the next milestone.
 
-### Status Fitur
+### Feature Status
 
-| Modul | Status | Keterangan |
-|-------|--------|------------|
+| Module | Status | Notes |
+|--------|--------|-------|
 | UTXO Model | ✅ Production | Persisted, crash-safe |
 | Proof of Work | ✅ Production | double-SHA256, 80-byte header |
 | P2P Networking | ✅ Production | Network magic, rate limiting, ban |
@@ -72,39 +72,39 @@ Alamat    : Base58Check, awalan "A"
 | Coinbase Maturity | ✅ Production | 100-block lockup enforced |
 | Fork / Reorg | ✅ Production | Cumulative chain-work selection |
 | Web Explorer | ✅ Production | Live block/tx/address browser |
-| AI Job System | ✅ Production | Full lifecycle dengan escrow |
+| AI Job System | ✅ Production | Full lifecycle with escrow |
 | AI Worker Registry | ✅ Production | Capability matching, reputation |
-| ARC Payment Escrow | ✅ Production | Anti double-pay, dispute |
+| ARC Payment Escrow | ✅ Production | Anti double-pay, dispute handling |
 | Model Registry | ✅ Production | Metadata + hash on-chain |
 | AI Marketplace | ✅ Production | Search, quotes, auto-assign |
 | AI Agents | ✅ Production | Wallet, memory hash, agent economy |
-| Verification Layer | ✅ Production | 5 level (Hash/Redundant/Challenge/PoL/ZKML) |
+| Verification Layer | ✅ Production | 5 levels (Hash/Redundant/Challenge/PoL/ZKML) |
 | Reputation System | ✅ Production | Tier system, ban, decay, leaderboard |
 | AI Smart Contracts | ✅ Production | AI-condition programmable contracts |
-| PoUW | 🔬 Research | Keamanan belum terbukti — bukan di consensus |
-| ZKML | 🔬 Research | Placeholder — teknologi belum siap |
+| PoUW | 🔬 Research | Security not proven — NOT in consensus |
+| ZKML | 🔬 Research | Placeholder — technology not ready |
 | Federated Learning | 🔬 Prototype | Basic aggregation only |
-| Dynamic Economy | 📋 Planned | Perlu simulasi sebelum implementasi |
-| VPS Deployment | ❌ Belum | Milestone berikutnya |
-| AI Worker Runtime | ❌ Belum | Butuh inference engine (PyTorch/ONNX) |
-| Explorer UI (AI) | ❌ Belum | UI untuk jobs/agents belum dibuat |
+| Dynamic Economy | 📋 Planned | Simulation needed first |
+| VPS Deployment | ❌ Not Done | Next milestone |
+| AI Worker Runtime | ❌ Not Done | Needs inference engine (PyTorch/ONNX) |
+| Explorer UI (AI) | ❌ Not Done | No web UI for jobs/agents yet |
 
 ---
 
 ## Known Issues
 
-### Kritis (blocking public testnet)
-- **Belum ada node publik** — network hanya berjalan lokal. Belum ada yang bisa connect dari internet.
-- **AI Worker belum bisa jalankan model** — `ai/worker.py` mendefinisikan protokol, tapi tidak ada runtime inference. Perlu integrasi manual dengan PyTorch/ONNX.
+### Critical (blocking public testnet)
+- **No public node running** — network only works locally. Nobody can connect from the internet yet.
+- **AI Worker has no runtime** — `ai/worker.py` defines the protocol but there is no inference engine. Needs manual integration with PyTorch/ONNX.
 
-### Tinggi
-- **Payment belum otomatis** — escrow direcord, tapi transaksi ARC harus dibuat manual via wallet CLI.
-- **Tidak ada UI untuk AI features** — web explorer hanya tampilkan blockchain. Jobs, Workers, Models, Agents belum bisa dilihat di browser.
-- **LevelDB tidak tersedia di Windows** — butuh C++ Build Tools. Otomatis fallback ke JSON store.
+### High
+- **Payment not automated** — escrow is recorded, but ARC transactions must be created manually via wallet CLI.
+- **No UI for AI features** — web explorer only shows blockchain data. Jobs, Workers, Models, Agents have no visual interface yet.
+- **LevelDB unavailable on Windows** — requires C++ Build Tools. Falls back to JSON store automatically.
 
-### Menengah
-- **Seed node kosong** — `SEED_NODES` di `coin_params.py` belum diisi. Node baru tidak bisa auto-discover peer.
-- **ZKML adalah stub** — raise `NotImplementedError`. Teknologi belum siap di level industri manapun.
+### Medium
+- **Seed nodes empty** — `SEED_NODES` in `coin_params.py` is not filled. New nodes cannot auto-discover peers.
+- **ZKML is a stub** — raises `NotImplementedError`. Technology not production-ready anywhere in the industry.
 
 ---
 
@@ -118,22 +118,22 @@ cd arche-blockchain
 # 2. Install
 pip install -r requirements.txt
 
-# 3. Buat wallet
+# 3. Create wallet
 python -m wallet.cli_wallet create --base58
 
-# 4. Buat genesis block
-python -m scripts.genesis --data ./arc-data --address <ALAMAT_KAMU> --difficulty 1
+# 4. Create genesis block
+python -m scripts.genesis --data ./arc-data --address <YOUR_ADDRESS> --difficulty 1
 
-# 5. Jalankan node + mining
+# 5. Run node + mine
 python -m node.node --data ./arc-data --port 9333 --http-port 9334 \
-  --difficulty 1 --mine --miner <ALAMAT_KAMU> \
+  --difficulty 1 --mine --miner <YOUR_ADDRESS> \
   --no-retarget --network testnet
 
-# 6. Buka explorer
+# 6. Open explorer
 python -m rpc.explorer --data ./arc-data --port 8080
-# Buka: http://127.0.0.1:8080/ui/index.html
+# Open: http://127.0.0.1:8080/ui/index.html
 
-# 7. Jalankan AI API (opsional)
+# 7. Run AI API (optional)
 python -m ai.api --data ./arc-data --port 9444
 ```
 
@@ -141,7 +141,7 @@ python -m ai.api --data ./arc-data --port 9444
 
 ## Join the Network
 
-> ⚠️ Node publik belum di-deploy. Langkah ini akan berfungsi setelah VPS online.
+> ⚠️ No public node deployed yet. These steps will work once a VPS is online.
 
 ```bash
 git clone https://github.com/rezkyaditya21/arche-blockchain.git
@@ -149,10 +149,10 @@ cd arche-blockchain
 pip install -r requirements.txt
 python -m wallet.cli_wallet create --base58
 python -m node.node --data ./arc-data --port 9333 --http-port 9334 \
-  --difficulty 1 --mine --miner <ALAMAT_KAMU> --network testnet
+  --difficulty 1 --mine --miner <YOUR_ADDRESS> --network testnet
 ```
 
-Panduan lengkap: **[INSTALL.md](INSTALL.md)**
+Full guide: **[INSTALL.md](INSTALL.md)**
 
 ---
 
@@ -167,18 +167,18 @@ Total suites : 12
 Passed       : 12
 Failed       : 0
 
-  Regression Baseline          127 tests
-  Consensus                     39 tests
-  Reorg + Persistence           11 tests
-  Wallet Security + Fuzz        52 tests
-  P2P Security                   8 tests
-  AI Network (Phase 1-6)        45 tests
-  AI Verification               37 tests
-  AI Reputation                 23 tests
-  Experimental (PoUW/ZKML/FL)   27 tests
-  AI Smart Contracts            26 tests
-  Regtest Demo                  20 tests
-  Syntax Check                   1 test
+  Regression Baseline           127 tests
+  Consensus                      39 tests
+  Reorg + Persistence            11 tests
+  Wallet Security + Fuzz         52 tests
+  P2P Security                    8 tests
+  AI Network (Phase 1-6)         45 tests
+  AI Verification                37 tests
+  AI Reputation                  23 tests
+  Experimental (PoUW/ZKML/FL)    27 tests
+  AI Smart Contracts             26 tests
+  Regtest Demo                   20 tests
+  Syntax Check                    1 test
 ```
 
 ---
@@ -186,25 +186,25 @@ Failed       : 0
 ## Features
 
 ### Blockchain Core
-- UTXO model — persisted, crash-safe, rebuilt automatically on startup
-- double-SHA256 Proof of Work dengan 80-byte binary block header
-- Difficulty adjustment otomatis setiap 2016 block (clamp ±4x)
-- Coinbase maturity: 100 block lockup di level konsensus
-- Fork/reorg via cumulative chain-work selection dengan UTXO rollback
-- Replay protection: `chain_id` dalam signing domain (mainnet/testnet/regtest)
-- Network magic: peer dari network berbeda ditolak saat handshake
-- P2P: persistent connections, rate limiting 100 msg/s, ban mechanism
+- UTXO model — persisted, crash-safe, auto-rebuilt on startup
+- double-SHA256 Proof of Work with fixed 80-byte binary block header
+- Automatic difficulty adjustment every 2016 blocks (±4x clamp)
+- Coinbase maturity: 100-block lockup enforced at consensus level
+- Fork/reorg via cumulative chain-work selection with UTXO rollback
+- Replay protection: `chain_id` in signing domain (mainnet/testnet/regtest)
+- Network magic: wrong-network peers rejected at handshake
+- P2P: persistent connections, 100 msg/s rate limiting, ban mechanism
 
 ### AI Economy Layer
-- **AI Jobs** — buat computation job, bayar dengan ARC, full lifecycle
-- **AI Workers** — daftarkan compute capability, matched ke job secara otomatis
-- **ARC Escrow** — escrow/release/refund otomatis dengan dispute handling
+- **AI Jobs** — create computation jobs, pay with ARC, full lifecycle
+- **AI Workers** — register compute capability, matched to jobs automatically
+- **ARC Escrow** — escrow/release/refund with dispute handling
 - **Model Registry** — metadata + hash on-chain, model file off-chain
-- **AI Marketplace** — search, price quotes, auto-assign worker terbaik
-- **AI Agents** — agent otonom dengan ARC wallet dan memory hash on-chain
-- **Verification** — 5 level dari hash comparison sampai ZKML research
+- **AI Marketplace** — search, price quotes, auto-assign best worker
+- **AI Agents** — autonomous agents with ARC wallet and on-chain memory hash
+- **Verification** — 5 levels from hash comparison to ZKML (research)
 - **Reputation** — tier system (Probation→Elite), ban, score decay
-- **Smart Contracts** — kontrak dengan AI condition dan programmable actions
+- **Smart Contracts** — AI-condition programmable transactions
 
 ### Network Modes
 | Network | chain_id | P2P Port | HTTP Port |
@@ -220,19 +220,19 @@ Failed       : 0
 ```
 arche-blockchain/
 │
-├── coin_params.py       ← Satu sumber kebenaran untuk semua konstanta
+├── coin_params.py       ← Single source of truth for all constants
 │
 ├── node/                ← Blockchain core
 │   ├── block.py         ← Block header, hashing, PoW
-│   ├── chain.py         ← State, UTXO, validasi, reorg
-│   ├── tx.py            ← Transaksi, signing, validasi
+│   ├── chain.py         ← State, UTXO, validation, reorg
+│   ├── tx.py            ← Transactions, signing, validation
 │   ├── pow.py           ← Mining, difficulty retarget
 │   ├── storage.py       ← LevelDB / JSON crash-safe KV store
 │   ├── p2p.py           ← TCP P2P, network magic, rate limit
 │   ├── node.py          ← Full node + HTTP API
 │   └── network.py       ← mainnet / testnet / regtest params
 │
-├── wallet/              ← Wallet (BIP39, HD keys, enkripsi)
+├── wallet/              ← Wallet (BIP39, HD keys, encryption)
 ├── rpc/                 ← HTTP explorer + web UI
 ├── explorer/            ← Web frontend (HTML/CSS/JS)
 │
@@ -250,57 +250,57 @@ arche-blockchain/
 ├── agents/              ← AI Agents
 │   └── registry.py      ← Agent registry + memory
 │
-├── experimental/        ← Research (bukan production)
+├── experimental/        ← Research (not production)
 │   ├── pouw/            ← Proof-of-Useful-Work research
 │   ├── zkml/            ← ZKML placeholder
 │   └── federated/       ← Federated learning prototype
 │
 ├── scripts/             ← Genesis, regtest demo
 ├── tests/               ← 477 tests, 12 suites
-├── docs/                ← Spesifikasi konsensus, threat model
-└── audit/               ← Laporan audit keamanan
+├── docs/                ← Consensus spec, threat model, vision
+└── audit/               ← Security audit reports
 ```
 
 ---
 
 ## Roadmap
 
-### v1.1 — Deploy (segera)
-- [ ] Deploy node ke VPS publik
-- [ ] Isi seed node di `coin_params.py`
-- [ ] Bangun `worker_runner.py` — runtime inference AI
-- [ ] Tambahkan AI features ke web explorer
+### v1.1 — Deploy (next)
+- [ ] Deploy node to public VPS
+- [ ] Fill seed nodes in `coin_params.py`
+- [ ] Build `worker_runner.py` — AI inference runtime
+- [ ] Add AI features to web explorer UI
 
 ### v1.2
-- [ ] Otomatisasi payment escrow
-- [ ] GUI wallet (desktop atau web)
-- [ ] Multi-node testnet (3+ node)
+- [ ] Automate payment escrow
+- [ ] GUI wallet (desktop or web)
+- [ ] Multi-node testnet (3+ nodes)
 
 ### v1.3 — Mainnet Prep
-- [ ] Genesis block mainnet yang final
-- [ ] Audit keamanan eksternal
+- [ ] Final mainnet genesis block
+- [ ] External security audit
 - [ ] DNS seed nodes
 
-### Research (tanpa timeline)
-- [ ] ZKML — menunggu library yang mature
-- [ ] PoUW — analisis keamanan masih berlangsung
-- [ ] Dynamic compute economy — perlu simulasi
+### Research (no timeline)
+- [ ] ZKML — waiting for mature ZK library
+- [ ] PoUW — security analysis in progress
+- [ ] Dynamic compute economy — simulation needed
 
 ---
 
-## Dokumentasi
+## Documentation
 
-| Dokumen | Isi |
-|---------|-----|
-| [INSTALL.md](INSTALL.md) | Panduan install lengkap dari nol |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Cara berkontribusi |
-| [CHANGELOG.md](CHANGELOG.md) | Riwayat perubahan |
-| [docs/VISION.md](docs/VISION.md) | Visi dan identitas ARCHE |
-| [docs/CONSENSUS.md](docs/CONSENSUS.md) | Spesifikasi konsensus ARCHE |
-| [docs/THREAT_MODEL.md](docs/THREAT_MODEL.md) | Analisis ancaman keamanan |
-| [docs/AI_NETWORK.md](docs/AI_NETWORK.md) | Dokumentasi AI layer |
-| [docs/TOKENOMICS.md](docs/TOKENOMICS.md) | Model ekonomi ARC |
-| [audit/](audit/) | Laporan audit keamanan |
+| Document | Description |
+|----------|-------------|
+| [INSTALL.md](INSTALL.md) | Step-by-step installation guide |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
+| [CHANGELOG.md](CHANGELOG.md) | Version history |
+| [docs/VISION.md](docs/VISION.md) | Vision and identity of ARCHE |
+| [docs/CONSENSUS.md](docs/CONSENSUS.md) | ARCHE consensus specification |
+| [docs/THREAT_MODEL.md](docs/THREAT_MODEL.md) | Security threat analysis |
+| [docs/AI_NETWORK.md](docs/AI_NETWORK.md) | AI layer documentation |
+| [docs/TOKENOMICS.md](docs/TOKENOMICS.md) | ARC economic model |
+| [audit/](audit/) | Security audit reports |
 
 ---
 

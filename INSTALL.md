@@ -1,42 +1,41 @@
-# Panduan Install ARCHE (ARC)
+# ARCHE Installation Guide
 
-Panduan lengkap untuk menjalankan node ARCHE dari nol.
+Complete guide to running an ARCHE node from scratch.
 
-> ⚠️ **Status saat ini:** Network belum publik. Node kamu akan berjalan secara lokal.
-> Setelah VPS publik di-deploy, node kamu akan otomatis terhubung ke jaringan.
+> ⚠️ **Current status:** The network is not yet publicly deployed. Your node will run locally.
+> Once a public VPS is live, your node will automatically connect to the network.
 
 ---
 
-## Syarat Sistem
+## System Requirements
 
-| Kebutuhan | Minimum |
-|-----------|---------|
+| Requirement | Minimum |
+|-------------|---------|
 | OS | Windows 10/11, macOS 12+, Ubuntu 20.04+ |
-| Python | 3.11 atau lebih baru |
+| Python | 3.11 or newer |
 | RAM | 1 GB |
 | Storage | 1 GB |
-| Internet | Diperlukan untuk sync antar node |
+| Internet | Required for peer sync |
 
 ---
 
-## Langkah 0 — Install Python (jika belum ada)
+## Step 0 — Install Python (if not already installed)
 
-**Cek apakah Python sudah ada:**
+**Check if Python is installed:**
 ```bash
 python --version
 ```
 
-Jika belum ada atau versinya di bawah 3.11:
+If not installed or version is below 3.11:
 
 **Windows:**
-- Download dari https://python.org/downloads
-- Saat install, centang **"Add Python to PATH"**
-- Restart terminal setelah install
+- Download from https://python.org/downloads
+- During install, check **"Add Python to PATH"**
+- Restart terminal after install
 
 **Ubuntu/Debian:**
 ```bash
-sudo apt update
-sudo apt install python3.11 python3.11-pip
+sudo apt update && sudo apt install python3.11 python3-pip
 ```
 
 **macOS:**
@@ -46,51 +45,46 @@ brew install python@3.11
 
 ---
 
-## Langkah 1 — Download ARCHE
+## Step 1 — Download ARCHE
 
-**Cara 1 — Git (direkomendasikan):**
+**Option 1 — Git (recommended):**
 ```bash
 git clone https://github.com/rezkyaditya21/arche-blockchain.git
 cd arche-blockchain
 ```
 
-**Cara 2 — Download ZIP:**
-- Buka https://github.com/rezkyaditya21/arche-blockchain
-- Klik tombol hijau **Code** → **Download ZIP**
-- Extract ke folder mana saja
-- Buka terminal di folder tersebut
+**Option 2 — Download ZIP:**
+- Go to https://github.com/rezkyaditya21/arche-blockchain
+- Click the green **Code** button → **Download ZIP**
+- Extract to any folder
+- Open a terminal in that folder
 
 ---
 
-## Langkah 2 — Install Dependencies
+## Step 2 — Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Jika error `pip not found`:
+If you get `pip not found`:
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-Jika ada error `coincurve`:
-```bash
-pip install coincurve
-```
-
-> **Catatan Windows:** LevelDB (database cepat) tidak tersedia di Windows tanpa
-> Microsoft C++ Build Tools. ARCHE akan otomatis menggunakan JSON store sebagai
-> pengganti — ini normal dan tidak bermasalah untuk testnet.
+> **Windows note:** LevelDB (fast database) is not available on Windows without
+> Microsoft C++ Build Tools. ARCHE automatically falls back to a JSON store —
+> this is normal and works fine for testnet.
 
 ---
 
-## Langkah 3 — Buat Wallet
+## Step 3 — Create a Wallet
 
 ```bash
 python -m wallet.cli_wallet create --base58
 ```
 
-Contoh output:
+Example output:
 ```json
 {
   "address_hex": "4782fc318e605987dc49266a7ef395802e02c41f",
@@ -100,38 +94,30 @@ Contoh output:
 }
 ```
 
-> ⚠️ **PENTING:** Simpan 12 kata mnemonic di tempat yang aman (tulis di kertas).
-> Ini satu-satunya cara untuk memulihkan wallet kamu jika file hilang.
-> Jangan share mnemonic ke siapapun.
+> ⚠️ **IMPORTANT:** Save your 12-word mnemonic somewhere safe (write it on paper).
+> This is the only way to recover your wallet if the file is lost.
+> Never share your mnemonic with anyone.
 
-**Buat wallet dengan password (lebih aman):**
+**Create an encrypted wallet (more secure):**
 ```bash
-python -m wallet.cli_wallet create --base58 --password "passwordkamu"
+python -m wallet.cli_wallet create --base58 --password "yourpassword"
 ```
 
 ---
 
-## Langkah 4 — Buat Genesis Block
+## Step 4 — Create Genesis Block
 
-Langkah ini hanya perlu dilakukan **sekali** saat pertama kali setup.
+This step only needs to be done **once** during first-time setup.
 
 ```bash
-python -m scripts.genesis \
-  --data ./arc-data \
-  --address <ALAMAT_KAMU> \
-  --difficulty 1
+python -m scripts.genesis --data ./arc-data --address <YOUR_ADDRESS> --difficulty 1
 ```
 
-**Windows:**
-```bash
-python -m scripts.genesis --data ./arc-data --address <ALAMAT_KAMU> --difficulty 1
-```
-
-Ganti `<ALAMAT_KAMU>` dengan `address_hex` dari langkah 3.
+Replace `<YOUR_ADDRESS>` with the `address_hex` from Step 3.
 
 ---
 
-## Langkah 5 — Jalankan Node & Mining
+## Step 5 — Run Node and Start Mining
 
 ```bash
 python -m node.node \
@@ -140,17 +126,17 @@ python -m node.node \
   --http-port 9334 \
   --difficulty 1 \
   --mine \
-  --miner <ALAMAT_KAMU> \
+  --miner <YOUR_ADDRESS> \
   --no-retarget \
   --network testnet
 ```
 
-**Windows (satu baris):**
+**Windows (single line):**
 ```bash
-python -m node.node --data ./arc-data --port 9333 --http-port 9334 --difficulty 1 --mine --miner <ALAMAT_KAMU> --no-retarget --network testnet
+python -m node.node --data ./arc-data --port 9333 --http-port 9334 --difficulty 1 --mine --miner <YOUR_ADDRESS> --no-retarget --network testnet
 ```
 
-Node berhasil jalan jika muncul log seperti:
+The node is running successfully when you see logs like:
 ```
 [ARCHE] Node started  height=0
 [ARC] Mined block h=1  0a3f...
@@ -159,107 +145,96 @@ Node berhasil jalan jika muncul log seperti:
 
 ---
 
-## Langkah 6 — Buka Explorer (Opsional)
+## Step 6 — Open Explorer (Optional)
 
-Buka terminal baru, lalu:
-
+Open a new terminal:
 ```bash
 python -m rpc.explorer --data ./arc-data --port 8080
 ```
 
-Buka di browser: **http://127.0.0.1:8080/ui/index.html**
+Open in browser: **http://127.0.0.1:8080/ui/index.html**
 
 ---
 
-## Langkah 7 — Cek Balance
+## Step 7 — Check Balance
 
 ```bash
-python -m wallet.cli_wallet balance <ALAMAT_KAMU> --rpc http://127.0.0.1:9334
+python -m wallet.cli_wallet balance <YOUR_ADDRESS> --rpc http://127.0.0.1:9334
 ```
 
-> **Catatan:** Mining reward (coinbase) tidak bisa langsung dipakai.
-> Harus menunggu **100 block** setelah reward diterima (coinbase maturity rule).
+> **Note:** Mining rewards (coinbase) cannot be spent immediately.
+> You must wait **100 blocks** after the reward is received (coinbase maturity rule).
 
 ---
 
-## Kirim ARC ke Orang Lain
+## Send ARC to Someone
 
 ```bash
-python -m wallet.cli_wallet send <ALAMAT_TUJUAN> <JUMLAH> \
+python -m wallet.cli_wallet send <RECIPIENT_ADDRESS> <AMOUNT> \
   --wallet ~/.arc_wallet/default.json \
   --rpc http://127.0.0.1:9334 \
   --fee 1000 \
   --wait 60
 ```
 
-Contoh kirim **1 ARC** (= 100,000,000 base units):
+Example — send **1 ARC** (= 100,000,000 base units):
 ```bash
 python -m wallet.cli_wallet send ANHz...xxxx 100000000 --wallet ~/.arc_wallet/default.json --rpc http://127.0.0.1:9334 --fee 1000 --wait 60
 ```
 
 ---
 
-## Recovery Wallet dari Mnemonic
+## Recover Wallet from Mnemonic
 
-Jika ganti komputer atau file wallet hilang:
-
+If you switch computers or lose your wallet file:
 ```bash
 python -m wallet.cli_wallet recover \
-  --seed "kata1 kata2 kata3 kata4 kata5 kata6 kata7 kata8 kata9 kata10 kata11 kata12"
+  --seed "word1 word2 word3 word4 word5 word6 word7 word8 word9 word10 word11 word12"
 ```
 
 ---
 
-## Demo Lengkap (Regtest)
+## Full Demo (Regtest)
 
-Untuk mencoba semua fitur secara otomatis:
-
+To try all features automatically:
 ```bash
 python scripts/regtest_demo.py
 ```
 
-Demo ini akan:
-- Buat wallet Alice dan Bob
-- Mining 101 block
-- Kirim transaksi dari Alice ke Bob
-- Verifikasi balance
-- Test persistence setelah restart
+This demo will: create wallets, mine 101 blocks, send a transaction, verify balances, and test persistence after restart.
 
 ---
 
 ## FAQ
 
-**Q: Berapa lama sync blockchain?**
-A: Sangat cepat untuk testnet awal (< 1 menit). Tergantung panjang chain.
+**Q: How long does blockchain sync take?**
+A: Very fast for early testnet (under 1 minute). Depends on chain length.
 
-**Q: Berapa reward mining?**
-A: 50 ARC per block. Halving setiap 500,000 block. Total supply 50 juta ARC.
+**Q: How much is the mining reward?**
+A: 50 ARC per block. Halving every 500,000 blocks. Total supply 50 million ARC.
 
-**Q: Kenapa reward mining tidak langsung bisa dipakai?**
-A: Ini adalah **Coinbase Maturity Rule** — keamanan standar di semua blockchain serius. Mining reward harus menunggu 100 block sebelum bisa dibelanjakan.
+**Q: Why can't I spend my mining reward right away?**
+A: This is the **Coinbase Maturity Rule** — a standard security measure. Mining rewards must wait 100 blocks before they can be spent.
 
-**Q: Port apa yang perlu dibuka?**
-A: Port **9333** (P2P) — agar node kamu terlihat oleh node lain. Port 9334 (HTTP API) opsional.
+**Q: Which ports need to be open?**
+A: Port **9333** (P2P) so other nodes can find you. Port 9334 (HTTP API) is optional.
 
-**Q: Data aman kalau komputer mati?**
-A: Ya. Semua data tersimpan di folder `arc-data`. Node lanjut dari block terakhir saat dinyalakan lagi.
+**Q: Is my data safe if the computer shuts down?**
+A: Yes. All data is stored in the `arc-data` folder. The node resumes from the last block when restarted.
 
-**Q: Bisa connect ke node lain sekarang?**
-A: Belum. Network publik belum di-deploy. Node kamu akan jalan lokal dulu. Update akan menyusul.
-
-**Q: Apakah bisa jalan di HP Android?**
-A: Belum. Butuh Python 3.11 yang tidak tersedia di Android secara native.
+**Q: Can I connect to other nodes right now?**
+A: Not yet. The public network has not been deployed. Your node runs locally for now.
 
 ---
 
 ## Troubleshooting
 
-| Error | Solusi |
-|-------|--------|
+| Error | Solution |
+|-------|----------|
 | `ModuleNotFoundError: coincurve` | `pip install coincurve` |
 | `ModuleNotFoundError: flask` | `pip install flask` |
-| `RIPEMD160 unavailable` | Install OpenSSL legacy: `sudo apt install libssl-dev` |
-| `Port already in use` | Ganti `--port` ke nomor lain, misal `9334` |
-| `Address already in use` | Node sudah jalan di background. Tutup dulu atau ganti port |
-| Node tidak mining | Pastikan `--mine` dan `--miner` sudah diisi |
-| Balance 0 padahal sudah mining | Tunggu 100 block (coinbase maturity) |
+| `RIPEMD160 unavailable` | `sudo apt install libssl-dev` (Linux) |
+| `Port already in use` | Change `--port` to another number |
+| `Address already in use` | A node is already running. Stop it or use a different port |
+| Node not mining | Make sure `--mine` and `--miner` flags are set |
+| Balance 0 after mining | Wait 100 blocks (coinbase maturity rule) |

@@ -4,43 +4,43 @@
 
 ---
 
-## Identitas ARC
+## ARC Identity
 
-ARC bukan sekadar coin transfer. ARC adalah unit ekonomi dari seluruh ekosistem ARCHE — dari pembayaran komputasi AI sampai kontrak otonom antar mesin.
-
----
-
-## Kegunaan ARC
-
-| Use Case | Keterangan |
-|----------|------------|
-| Transaction fee | Biaya setiap transaksi on-chain |
-| AI computation | Bayar worker untuk menjalankan model AI |
-| Model access | Bayar per inference ke model berbayar |
-| Agent payment | AI agent bayar AI agent lain |
-| Marketplace | Bayar layanan di AI marketplace |
-| Worker reward | Reward untuk worker yang selesaikan job |
-| Escrow | Jaminan pembayaran selama job berlangsung |
-| Smart contract | Trigger aksi berdasarkan hasil AI |
+ARC is not just a transfer coin. ARC is the economic unit of the entire ARCHE ecosystem — from paying for AI computation to autonomous machine-to-machine contracts.
 
 ---
 
-## Supply Tetap
+## ARC Utility
+
+| Use Case | Description |
+|----------|-------------|
+| Transaction fee | Cost of every on-chain transaction |
+| AI computation | Pay workers to run AI models |
+| Model access | Pay per inference call to paid models |
+| Agent payment | AI agent pays another AI agent |
+| Marketplace | Pay for services in the AI marketplace |
+| Worker reward | Reward for workers who complete jobs |
+| Escrow | Payment guarantee while job is in progress |
+| Smart contract | Trigger actions based on AI results |
+
+---
+
+## Fixed Supply
 
 ```
 Max Supply      : 50,000,000 ARC
 Initial Reward  : 50 ARC per block
-Halving         : Setiap 500,000 block
-Block Time      : 2 menit (target)
-Total Base Units: 5,000,000,000,000,000 (1 ARC = 100,000,000 base units)
+Halving         : Every 500,000 blocks
+Block Time      : 2 minutes (target)
+Base Units      : 1 ARC = 100,000,000 base units
 ```
 
-Supply tidak bisa ditambah. Tidak ada inflasi setelah semua ARC habis ditambang.
+Supply is fixed. No inflation after all ARC is mined.
 
-**Jadwal supply:**
+**Supply schedule:**
 
-| Era | Block | Reward | ARC Ditambang |
-|-----|-------|--------|---------------|
+| Era | Blocks | Reward | ARC Mined |
+|-----|--------|--------|-----------|
 | 0 | 0 – 499,999 | 50 ARC | 25,000,000 |
 | 1 | 500k – 999k | 25 ARC | 12,500,000 |
 | 2 | 1M – 1.5M | 12.5 ARC | 6,250,000 |
@@ -49,12 +49,12 @@ Supply tidak bisa ditambah. Tidak ada inflasi setelah semua ARC habis ditambang.
 
 ---
 
-## AI Compute Rewards (Model Saat Ini)
+## AI Compute Rewards (Current Model)
 
-Worker AI mendapat reward langsung dari requester via escrow — bukan dari inflasi protokol. Supply tetap tidak terganggu oleh AI layer.
+AI workers receive rewards directly from requesters via escrow — not from protocol inflation. The fixed supply is not affected by the AI layer.
 
 ```
-Worker reward = agreed_price (dari requester)
+Worker reward = agreed_price (from requester)
               = worker_fee + model_call_fee
 ```
 
@@ -62,11 +62,11 @@ Worker reward = agreed_price (dari requester)
 
 ## Research: Dynamic Compute Economy
 
-> **Status: Research — Belum Diimplementasikan**
+> **Status: Research — Not Implemented**
 
-Opsi yang sedang dikaji untuk simulasi testnet:
-- Pool reward khusus untuk AI compute workers
-- Dynamic reward berdasarkan demand/supply
-- Tidak akan mengubah max supply 50,000,000 ARC
+Options under consideration for testnet simulation:
+- Dedicated reward pool for AI compute workers
+- Dynamic reward based on demand/supply balance
+- Will not change the 50,000,000 ARC max supply
 
-Simulasi harus selesai sebelum implementasi.
+Simulation must be completed before any implementation.

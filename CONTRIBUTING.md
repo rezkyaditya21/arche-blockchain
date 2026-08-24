@@ -1,55 +1,55 @@
-# Berkontribusi ke ARCHE
+# Contributing to ARCHE
 
-Terima kasih sudah tertarik berkontribusi ke ARCHE.
+Thank you for your interest in contributing to ARCHE.
 
 ---
 
-## Setup Awal
+## Getting Started
 
 ```bash
 git clone https://github.com/rezkyaditya21/arche-blockchain.git
 cd arche-blockchain
 pip install -r requirements-dev.txt
-python test_all.py  # Semua 12 suite harus pass sebelum mulai
+python test_all.py  # All 12 suites must pass before you start
 ```
 
 ---
 
-## Aturan Wajib
+## Rules
 
-1. **Test dulu** — Tulis test yang gagal sebelum memperbaiki bug atau menambah fitur
-2. **Semua test harus pass** — `python test_all.py` harus `Failed: 0` sebelum PR
-3. **Jangan kompromi keamanan konsensus** — jangan mock consensus untuk membuat test pass
-4. **Jangan commit private key** — periksa `.gitignore`, jangan commit wallet file
-5. **Baca VISION.md dulu** — pahami tujuan proyek sebelum mengusulkan perubahan besar
+1. **Test first** — write a failing test before fixing a bug or adding a feature
+2. **All tests must pass** — `python test_all.py` must show `Failed: 0` before submitting a PR
+3. **Never mock consensus** — do not fake consensus rules just to make tests pass
+4. **No private keys in commits** — check `.gitignore`, never commit wallet files
+5. **Read VISION.md first** — understand the project direction before proposing big changes
 
 ---
 
-## Area yang Butuh Kontribusi
+## Areas That Need Help
 
-| Prioritas | Area | Keterangan |
-|-----------|------|------------|
-| 🔴 Tinggi | VPS deployment | Setup node publik |
-| 🔴 Tinggi | AI Worker runtime | Integrasi PyTorch/ONNX |
-| 🟡 Menengah | Explorer UI untuk AI | Tampilkan jobs/workers di browser |
-| 🟡 Menengah | Payment automation | Otomatisasi escrow transaction |
-| 🟢 Rendah | Dokumentasi | Perbaiki atau tambah panduan |
-| 🔬 Research | ZKML | Ikuti perkembangan library ZK |
+| Priority | Area | Notes |
+|----------|------|-------|
+| 🔴 High | VPS deployment | Set up a public node |
+| 🔴 High | AI Worker runtime | Integrate PyTorch/ONNX for real inference |
+| 🟡 Medium | Explorer UI for AI | Show jobs/workers in the browser |
+| 🟡 Medium | Payment automation | Automate escrow transactions |
+| 🟢 Low | Documentation | Fix or expand guides |
+| 🔬 Research | ZKML | Follow developments in ZK library ecosystem |
 
-Lihat juga: [audit/](audit/) untuk daftar bug dan masalah yang sudah teridentifikasi.
+See [audit/](audit/) for a list of identified bugs and issues.
 
 ---
 
 ## Pull Request
 
-- Branch: `feature/...` atau `fix/...`
-- Satu perubahan logis per commit
-- Jelaskan apa yang diubah dan mengapa di deskripsi PR
-- Pastikan tidak ada referensi ke proyek lain yang tidak perlu
+- Branch name: `feature/...` or `fix/...`
+- One logical change per commit
+- Explain what you changed and why in the PR description
+- No unnecessary references to other projects
 
 ## Code Style
 
-- Python 3.11+, type hints di mana practical
-- `snake_case` untuk fungsi dan variabel
-- Semua konstanta network di `coin_params.py` — jangan hardcode
-- Baca `docs/VISION.md` untuk memahami arah proyek
+- Python 3.11+, type hints where practical
+- `snake_case` for functions and variables
+- All network constants in `coin_params.py` — never hardcode values
+- Read `docs/VISION.md` to understand the project direction

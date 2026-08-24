@@ -4,9 +4,9 @@
 
 ---
 
-## Gambaran Umum
+## Overview
 
-ARCHE AI Network adalah layer ekonomi AI yang berjalan di atas blockchain ARCHE. ARC digunakan sebagai native payment untuk semua layanan AI dalam ekosistem ini.
+ARCHE AI Network is the AI economy layer running on top of the ARCHE blockchain. ARC is used as the native payment for all AI services in this ecosystem.
 
 ```
 ARCHE BLOCKCHAIN CORE
@@ -14,7 +14,7 @@ ARCHE BLOCKCHAIN CORE
 
          +
 
-ARCHE AI LAYER (modular, terpisah dari core)
+ARCHE AI LAYER (modular, separate from core)
     AI Jobs → AI Workers → ARC Payment
     Model Registry → AI Marketplace
     AI Agents → Agent Economy
@@ -23,10 +23,10 @@ ARCHE AI LAYER (modular, terpisah dari core)
 
 ---
 
-## Komponen
+## Components
 
 ### 1. AI Job System (`ai/job.py`)
-Unit kerja komputasi yang dibayar ARC.
+A unit of AI computation paid in ARC.
 
 **Status flow:**
 ```
@@ -37,99 +37,99 @@ PENDING → CANCELLED
 ```
 
 ### 2. AI Worker (`ai/worker.py`)
-Node terpisah yang menjalankan AI inference.
-- Blockchain node **tidak** butuh GPU
-- Worker mendaftarkan capability (CPU/GPU/RAM/framework)
-- Auto-matched dengan job yang compatible
+A separate node that runs AI inference.
+- Blockchain node does **not** need a GPU
+- Workers register their capability (CPU/GPU/RAM/framework)
+- Auto-matched to compatible jobs
 
 ### 3. ARC Payment (`ai/payment.py`)
-Escrow system menggunakan UTXO ARCHE.
-- **Escrow**: ARC dikunci sebelum job dimulai
-- **Release**: ARC dilepas ke worker setelah verified
-- **Refund**: ARC dikembalikan jika job gagal/cancelled
-- **Dispute**: ARC ditahan sampai resolved
+Escrow system using ARCHE UTXO.
+- **Escrow**: ARC locked before job starts
+- **Release**: ARC sent to worker after verification
+- **Refund**: ARC returned if job fails or is cancelled
+- **Dispute**: ARC held until resolved
 
 ### 4. Model Registry (`ai/registry.py`)
-Metadata model AI di-record on-chain.
-- Model file disimpan off-chain (URL/storage reference)
-- Blockchain hanya menyimpan: hash, owner, version, metadata
-- Search by task, framework, price, GPU requirement
+AI model metadata recorded on-chain.
+- Model files stored off-chain (URL or storage reference)
+- Blockchain stores only: hash, owner, version, metadata
+- Searchable by task, framework, price, GPU requirement
 
 ### 5. AI Marketplace (`ai/marketplace.py`)
-Penghubung antara requester, model, dan worker.
-- Browse model + worker yang tersedia
-- Dapatkan price quotes
-- Auto-assign worker terbaik untuk job
+Connects requesters, models, and workers.
+- Browse available models and workers
+- Get price quotes
+- Auto-assign the best available worker
 
 ### 6. AI Agents (`agents/registry.py`)
-Agent otonom sebagai first-class participant.
-- Punya ARC wallet sendiri
-- Bisa request dan bayar AI job
-- Memory di-hash on-chain, disimpan off-chain
+Autonomous agents as first-class participants.
+- Have their own ARC wallet
+- Can request and pay for AI jobs
+- Memory hash recorded on-chain, stored off-chain
 - Agent-to-agent payment via ARC
 
 ### 7. Verification Layer (`ai/verification.py`)
-5 level verifikasi hasil AI:
+5 levels of AI result verification:
 
-| Level | Nama | Deskripsi | Status |
-|-------|------|-----------|--------|
-| 1 | Hash | Bandingkan hash output | ✅ Production |
-| 2 | Redundant | Majority vote dari banyak worker | ✅ Production |
-| 3 | Challenge | Worker wajib buktikan hasil | ✅ Production |
-| 4 | Proof of Logits | Verifikasi distribusi output model | 🔬 Research |
+| Level | Name | Description | Status |
+|-------|------|-------------|--------|
+| 1 | Hash | Compare output hash | ✅ Production |
+| 2 | Redundant | Majority vote from multiple workers | ✅ Production |
+| 3 | Challenge | Worker must prove result | ✅ Production |
+| 4 | Proof of Logits | Verify model output distribution | 🔬 Research |
 | 5 | ZKML | Zero-knowledge proof | 🔬 Placeholder |
 
 ### 8. Reputation System (`ai/reputation.py`)
-Sistem scoring untuk worker dan agent.
-- **Tier**: PROBATION → STANDARD → TRUSTED → ELITE
-- **Ban**: otomatis jika score terlalu rendah
-- **Decay**: score turun perlahan jika tidak aktif
-- **Leaderboard**: ranking berdasarkan score
+Scoring system for workers and agents.
+- **Tiers**: PROBATION → STANDARD → TRUSTED → ELITE
+- **Ban**: automatic when score drops too low
+- **Decay**: score decreases slowly when inactive
+- **Leaderboard**: ranked by score
 
 ### 9. AI Smart Contracts (`ai/contracts.py`)
-Kontrak programmable yang trigger berdasarkan hasil AI.
-- Condition: `gte`, `lte`, `eq`, `contains`, `not_null`
-- Action: `TRANSFER_ARC`, `RELEASE_ESCROW`, `EMIT_EVENT`, `TRIGGER_JOB`
-- Keamanan: hasil AI **harus** diverifikasi sebelum contract execute
+Programmable contracts triggered by AI results.
+- Conditions: `gte`, `lte`, `eq`, `contains`, `not_null`
+- Actions: `TRANSFER_ARC`, `RELEASE_ESCROW`, `EMIT_EVENT`, `TRIGGER_JOB`
+- Security: AI result **must** be verified before contract executes
 
 ---
 
 ## API Endpoints
 
-Jalankan AI API:
+Start the AI API:
 ```bash
 python -m ai.api --data ./arc-data --port 9444
 ```
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| POST | /ai/jobs | Buat AI job |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /ai/jobs | Create AI job |
 | GET | /ai/jobs | List jobs |
-| GET | /ai/jobs/:id | Detail job |
-| POST | /ai/jobs/:id/result | Worker submit hasil |
-| POST | /ai/jobs/:id/verify | Verifikasi hasil |
+| GET | /ai/jobs/:id | Job detail |
+| POST | /ai/jobs/:id/result | Worker submits result |
+| POST | /ai/jobs/:id/verify | Verify result |
 | POST | /ai/jobs/:id/cancel | Cancel job |
-| POST | /ai/workers | Daftarkan worker |
-| GET | /ai/workers | List worker tersedia |
-| POST | /ai/models | Daftarkan model |
-| GET | /ai/models | Search model |
+| POST | /ai/workers | Register worker |
+| GET | /ai/workers | List available workers |
+| POST | /ai/models | Register model |
+| GET | /ai/models | Search models |
 | GET | /ai/marketplace | Browse listings |
 | GET | /ai/marketplace/quotes/:id | Price quotes |
-| POST | /ai/payments/escrow | Buat escrow |
+| POST | /ai/payments/escrow | Create escrow |
 | POST | /ai/payments/:id/release | Release payment |
-| POST | /ai/agents | Daftarkan agent |
+| POST | /ai/agents | Register agent |
 | GET | /ai/agents | List agents |
-| POST | /ai/verify/hash | Verifikasi level 1 |
-| POST | /ai/verify/redundant/submit | Submit ke redundant pool |
-| POST | /ai/verify/logits | Verifikasi level 4 (research) |
+| POST | /ai/verify/hash | Level 1 verification |
+| POST | /ai/verify/redundant/submit | Submit to redundant pool |
+| POST | /ai/verify/logits | Level 4 verification (research) |
 
 ---
 
-## Catatan Keamanan
+## Security Notes
 
-- Blockchain node tidak mengeksekusi kode AI arbitrary
-- Worker berjalan di proses terpisah dengan sandbox sendiri
-- Double payment dicegah dengan tracking txid
-- Replay attack dicegah dengan chain_id di signing domain
-- Unauthorized claim: hanya assigned worker yang bisa submit hasil
-- AI result yang tidak diverifikasi tidak bisa trigger smart contract
+- Blockchain node does not execute arbitrary AI code
+- Workers run in a separate process with their own sandbox
+- Double payment prevented by txid tracking
+- Replay attacks prevented by chain_id in signing domain
+- Unauthorized claims: only the assigned worker can submit results
+- Unverified AI results cannot trigger smart contracts
