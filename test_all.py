@@ -102,14 +102,21 @@ run_suite(
     timeout=30,
 )
 
-# 8. Regtest demo (Phase 14)
+# 9. Experimental modules (Phase 9-11)
+run_suite(
+    "Experimental Modules (Phase 9-11: PoUW/ZKML/Federated)",
+    [sys.executable, "-m", "pytest", "tests/test_experimental.py", "-v", "--tb=short"],
+    timeout=30,
+)
+
+# 10. Regtest demo
 run_suite(
     "Regtest Demo (Phase 14)",
     [sys.executable, "scripts/regtest_demo.py"],
     timeout=60,
 )
 
-# 8. Syntax check all modules
+# 11. Syntax check all modules
 run_suite(
     "Syntax Check (all modules)",
     [sys.executable, "-m", "py_compile",
@@ -119,7 +126,9 @@ run_suite(
      "rpc/explorer.py", "scripts/genesis.py", "scripts/regtest_demo.py",
      "ai/job.py", "ai/worker.py", "ai/payment.py", "ai/registry.py",
      "ai/marketplace.py", "ai/api.py", "ai/verification.py",
-     "ai/reputation.py", "agents/registry.py"],
+     "ai/reputation.py", "agents/registry.py",
+     "experimental/pouw/pouw.py", "experimental/zkml/zkml.py",
+     "experimental/federated/federated.py"],
     timeout=30,
 )
 
