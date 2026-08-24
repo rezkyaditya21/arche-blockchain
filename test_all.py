@@ -83,12 +83,19 @@ run_suite(
 
 # 6. AI Network tests (Phase 1-6)
 run_suite(
-    "AI Network (Phase 1-6: Jobs/Workers/Payment/Models/Marketplace/Agents)",
+    "AI Network (Phase 1-6)",
     [sys.executable, "-m", "pytest", "tests/test_ai_network.py", "-v", "--tb=short"],
     timeout=60,
 )
 
-# 7. Regtest demo (Phase 14)
+# 7. Verification Layer tests (Phase 7)
+run_suite(
+    "AI Verification Layer (Phase 7: Hash/Redundant/Challenge/PoL/ZKML)",
+    [sys.executable, "-m", "pytest", "tests/test_verification.py", "-v", "--tb=short"],
+    timeout=30,
+)
+
+# 8. Regtest demo (Phase 14)
 run_suite(
     "Regtest Demo (Phase 14)",
     [sys.executable, "scripts/regtest_demo.py"],
@@ -104,7 +111,7 @@ run_suite(
      "node/network.py", "wallet/wallet.py", "wallet/cli_wallet.py",
      "rpc/explorer.py", "scripts/genesis.py", "scripts/regtest_demo.py",
      "ai/job.py", "ai/worker.py", "ai/payment.py", "ai/registry.py",
-     "ai/marketplace.py", "ai/api.py", "agents/registry.py"],
+     "ai/marketplace.py", "ai/api.py", "ai/verification.py", "agents/registry.py"],
     timeout=30,
 )
 

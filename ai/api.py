@@ -307,7 +307,97 @@ def create_ai_app(data_dir: str) -> Flask:
             return jsonify({"error": "not found"}), 404
         return jsonify(record.to_dict())
 
-    # ── Agents ──────────────────────────────────────────
+    from ai.verification import (
+        VerificationManager, VerificationPolicy, VerificationLevel,
+        WorkerSubmission,
+    )
+    verif_mgr = VerificationManager(VerificationPolicy(
+        min_level=VerificationLevel.HASH,
+        require_redundant_workers=3,
+        enable_pol=False,
+    ))
+    # In-memory redundant submission pools per job
+    _redundant_pools: dict = {}
+
+    # ── Verification ────────────────────────────────────
+    @app.post("/ai/verify/hash")
+    def verify_hash():
+        d = request.get_json(force=True, silent=True) or {}
+        required = ["job_id", "result_hash", "expected_hash"]
+        missing = [k for k in required if k not in d]
+        if missing:
+            return jsonify({"error": f"Missing: {missing}"}), 400
+        rec = verif_mgr.verify_hash(
+            job_id=d["job_id"],
+            result_hash=d["result_hash"],
+            expected_hash=d["expected_hash"],
+            verifier=d.get("verifier", "system"),
+        )
+        return jsonify(rec.to_dict())
+
+    @app.post("/ai/verify/redundant/submit")
+    def redundant_submit():
+        d = request.get_json(force=True, silent=True) or {}
+        required = ["job_id", "worker", "result_hash"]
+        missing = [k for k in required if k not in d]
+        if missing:
+            return jsonify({"error": f"Missing: {missing}"}), 400
+        job_id = d["job_id"]
+        if job_id not in _redundant_pools:
+            _redundant_pools[job_id] = []
+        try:
+            verif_mgr.redundant_verifier.add_submission(
+                _redundant_pools[job_id], d["worker"], d["result_hash"]
+            )
+            return jsonify({
+                "status": "submitted",
+                "submissions": len(_redundant_pools[job_id]),
+                "required": verif_mgr.redundant_verifier.MIN_WORKERS,
+            })
+        except Exception as e:
+            return jsonify({"error": str(e)}), 422
+
+    @app.post("/ai/verify/redundant/evaluate")
+    def redundant_evaluate():
+        d = request.get_json(force=True, silent=True) or {}
+        job_id = d.get("job_id")
+        if not job_id:
+            return jsonify({"error": "Missing job_id"}), 400
+        submissions = _redundant_pools.get(job_id, [])
+        rec, winner = verif_mgr.evaluate_redundant(
+            job_id, submissions, d.get("verifier", "system")
+        )
+        return jsonify({"record": rec.to_dict(), "winning_hash": winner})
+
+    @app.post("/ai/verify/challenge")
+    def open_challenge():
+        d = request.get_json(force=True, silent=True) or {}
+        required = ["job_id", "challenger", "worker", "reason"]
+        missing = [k for k in required if k not in d]
+        if missing:
+            return jsonify({"error": f"Missing: {missing}"}), 400
+        try:
+            c = verif_mgr.open_challenge(
+                d["job_id"], d["challenger"], d["worker"], d["reason"]
+            )
+            return jsonify(c.to_dict()), 201
+        except Exception as e:
+            return jsonify({"error": str(e)}), 422
+
+    @app.post("/ai/verify/logits")
+    def verify_logits():
+        d = request.get_json(force=True, silent=True) or {}
+        required = ["job_id", "submitted_logits", "reference_logits"]
+        missing = [k for k in required if k not in d]
+        if missing:
+            return jsonify({"error": f"Missing: {missing}"}), 400
+        rec = verif_mgr.verify_logits(
+            job_id=d["job_id"],
+            submitted_logits=d["submitted_logits"],
+            reference_logits=d["reference_logits"],
+            verifier=d.get("verifier", "system"),
+        )
+        return jsonify(rec.to_dict())
     @app.post("/ai/agents")
     def register_agent():
         d = request.get_json(force=True, silent=True) or {}
