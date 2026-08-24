@@ -88,10 +88,17 @@ run_suite(
     timeout=60,
 )
 
-# 7. Verification Layer tests (Phase 7)
+# 7. Verification Layer (Phase 7)
 run_suite(
-    "AI Verification Layer (Phase 7: Hash/Redundant/Challenge/PoL/ZKML)",
+    "AI Verification Layer (Phase 7)",
     [sys.executable, "-m", "pytest", "tests/test_verification.py", "-v", "--tb=short"],
+    timeout=30,
+)
+
+# 8. Reputation System (Phase 8)
+run_suite(
+    "AI Reputation System (Phase 8)",
+    [sys.executable, "-m", "pytest", "tests/test_reputation.py", "-v", "--tb=short"],
     timeout=30,
 )
 
@@ -111,7 +118,8 @@ run_suite(
      "node/network.py", "wallet/wallet.py", "wallet/cli_wallet.py",
      "rpc/explorer.py", "scripts/genesis.py", "scripts/regtest_demo.py",
      "ai/job.py", "ai/worker.py", "ai/payment.py", "ai/registry.py",
-     "ai/marketplace.py", "ai/api.py", "ai/verification.py", "agents/registry.py"],
+     "ai/marketplace.py", "ai/api.py", "ai/verification.py",
+     "ai/reputation.py", "agents/registry.py"],
     timeout=30,
 )
 
