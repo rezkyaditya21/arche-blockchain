@@ -104,12 +104,19 @@ run_suite(
 
 # 9. Experimental modules (Phase 9-11)
 run_suite(
-    "Experimental Modules (Phase 9-11: PoUW/ZKML/Federated)",
+    "Experimental Modules (Phase 9-11)",
     [sys.executable, "-m", "pytest", "tests/test_experimental.py", "-v", "--tb=short"],
     timeout=30,
 )
 
-# 10. Regtest demo
+# 10. AI Smart Contracts (Phase 12)
+run_suite(
+    "AI Smart Contracts (Phase 12)",
+    [sys.executable, "-m", "pytest", "tests/test_contracts.py", "-v", "--tb=short"],
+    timeout=30,
+)
+
+# 11. Regtest demo
 run_suite(
     "Regtest Demo (Phase 14)",
     [sys.executable, "scripts/regtest_demo.py"],
@@ -126,7 +133,7 @@ run_suite(
      "rpc/explorer.py", "scripts/genesis.py", "scripts/regtest_demo.py",
      "ai/job.py", "ai/worker.py", "ai/payment.py", "ai/registry.py",
      "ai/marketplace.py", "ai/api.py", "ai/verification.py",
-     "ai/reputation.py", "agents/registry.py",
+     "ai/reputation.py", "ai/contracts.py", "agents/registry.py",
      "experimental/pouw/pouw.py", "experimental/zkml/zkml.py",
      "experimental/federated/federated.py"],
     timeout=30,
