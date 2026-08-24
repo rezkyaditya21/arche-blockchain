@@ -1,83 +1,69 @@
 # Changelog
 
-All notable changes to ARCHE are documented here.
-
 ---
 
-## v1.0.0 — 2026-08-22
+## v1.0.0 — 2026-08-22 (Current)
 
-### Initial Release
-
-#### Core Blockchain
-- UTXO model persisted to LevelDB / JSON store
+### Blockchain Core
+- UTXO model persisted to LevelDB / crash-safe JSON store
 - double-SHA256 PoW with 80-byte binary header
 - Bitcoin-compatible compact target (nBits) encoding
 - Difficulty retarget every 2016 blocks (±4x clamp)
-- Coinbase maturity: 100 block lockup enforced at consensus
-- Fork/reorg via cumulative chain-work selection
-- UTXO rollback on reorg
+- Coinbase maturity: 100-block lockup enforced at consensus level
+- Fork/reorg: cumulative chain-work selection with UTXO rollback
 - Startup integrity check with automatic UTXO rebuild
+- Replay protection: chain_id in signing domain
+- Network magic bytes per network (mainnet/testnet/regtest)
+- P2P: persistent connections, rate limiting, ban mechanism, inventory dedup
+- Web explorer: live block/tx/address browser with search
 
-#### Transactions
-- Replay protection via chain_id in signing domain
-- Transaction malleability prevention (txid excludes signatures)
-- libsecp256k1 signing via `coincurve` (no timing side-channel)
-- P2PKH address locking (RIPEMD160 + SHA256)
-- Fee validation: fee = inputs − outputs ≥ 0
+### AI Economy Layer (Phase 1-8, 12)
+- **Phase 1** — AI Job System: full lifecycle (PENDING→COMPLETED), escrow tracking
+- **Phase 2** — AI Worker: capability registry, reputation, heartbeat
+- **Phase 3** — ARC Payment: escrow, release, refund, dispute
+- **Phase 4** — Model Registry: metadata + hash on-chain
+- **Phase 5** — AI Marketplace: search, price quotes, auto-assign
+- **Phase 6** — AI Agents: wallet, memory hash, agent economy
+- **Phase 7** — Verification Layer: 5 levels (Hash/Redundant/Challenge/PoL/ZKML)
+- **Phase 8** — Reputation System: tier system, ban, score decay, leaderboard
+- **Phase 12** — AI Smart Contracts: AI-condition programmable contracts
 
-#### Wallet
-- BIP39 2048-word mnemonic (128-bit entropy + checksum)
-- BIP32-style HD key derivation
-- AES-256-GCM encrypted wallet files with scrypt KDF
-- Base58Check address encoding (prefix "A" for mainnet)
-- CLI: create, recover, balance, send, info
+### Experimental Research (Phase 9-11)
+- **Phase 9** — PoUW research module + security analysis
+- **Phase 10** — ZKML placeholder + feasibility checker
+- **Phase 11** — Federated Learning prototype
 
-#### P2P Networking
-- Network magic bytes (4-byte, per-network)
-- Protocol version negotiation
-- Length-prefixed binary framing (no newline buffer DoS)
-- Persistent outbound connections with auto-reconnect
-- Per-peer rate limiting: 100 msg/s
-- Inbound connection limit: 125
-- Ban mechanism with persistent ban list
-- Inventory deduplication
-- Bidirectional peer exchange via HELLO
+### Testing
+- 12 test suites, 477 total tests, all passing
+- Consensus tests, reorg tests, wallet security, P2P security
+- AI network tests, verification tests, reputation tests
+- Smart contract tests, experimental module tests
+- Regtest demo (full end-to-end lifecycle)
 
-#### Network Modes
-- mainnet (chain_id=1, port 9333)
-- testnet (chain_id=2, port 19333)
-- regtest (chain_id=3, port 29333, instant mining)
+### Known Issues in v1.0.0
+- No public node deployed yet
+- AI Worker has no inference runtime
+- Payment not fully automated
+- No Explorer UI for AI features
+- LevelDB unavailable on Windows without C++ Build Tools
 
-#### HTTP API
-- GET /health, /block/:height, /tx/:txid
-- GET /balance/:address, /utxos/:address
-- GET /chain (paginated), /mempool
-- POST /tx (with rate limiting + CORS)
-- MAX_CONTENT_LENGTH = 1 MB
+---
 
-#### Web Explorer
-- Live stats: height, tip, block reward, supply, mempool, peers
-- Latest blocks table with pagination
-- Block detail: full header + transaction breakdown
-- Transaction detail: input/output flows
-- Address detail: balance + UTXO list
-- Mempool live view
-- Search: block height, txid, address
+## Planned: v1.1.0
 
-#### Security
-- Resource limits: MAX_BLOCK_SIZE (1 MB), MAX_TX_INPUTS (1000), MAX_TX_OUTPUTS (1000)
-- Empty block rejection
-- Duplicate txid in block rejection
-- Coinbase-not-first rejection
-- Multi-coinbase rejection
-- Inflation attack prevention
-- Integer overflow protection in fee calculation
+- Deploy public testnet VPS
+- Add seed node to coin_params.py
+- Build worker_runner.py (inference runtime)
+- AI features in web explorer UI
 
-#### Testing
-- 319+ tests across 7 suites
-- Regression baseline: 127 tests
-- Consensus suite: 39 tests
-- Reorg + persistence: 11 tests
-- Wallet security + fuzz: 52 tests
-- P2P security: 8 tests
-- Regtest demo: 20 tests
+## Planned: v1.2.0
+
+- AI Worker payment automation
+- GUI wallet
+- Multi-node testnet
+
+## Planned: v1.3.0
+
+- Mainnet genesis preparation
+- External security audit
+- DNS seed nodes
