@@ -7,7 +7,7 @@ independent node implementation to be fully compatible.
 
 ## 1. Block Format
 
-Each block header is serialized as **80 bytes** (identical layout to Bitcoin):
+Each block header is serialized as **80 bytes** in the following fixed layout:
 
 | Field          | Size | Type        | Description                          |
 |----------------|------|-------------|--------------------------------------|

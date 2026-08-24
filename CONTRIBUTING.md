@@ -1,37 +1,55 @@
-# Contributing to ARCHE
+# Berkontribusi ke ARCHE
 
-Thank you for your interest in contributing.
+Terima kasih sudah tertarik berkontribusi ke ARCHE.
 
-## Getting Started
+---
+
+## Setup Awal
 
 ```bash
 git clone https://github.com/rezkyaditya21/arche-blockchain.git
 cd arche-blockchain
 pip install -r requirements-dev.txt
-python test_all.py  # all 7 suites must pass before you start
+python test_all.py  # Semua 12 suite harus pass sebelum mulai
 ```
 
-## Rules
+---
 
-1. **Tests first** — write a failing test before fixing a bug or adding a feature
-2. **All tests must pass** — `python test_all.py` must show `Failed: 0` before PR
-3. **No consensus shortcuts** — never mock consensus rules to make tests pass
-4. **No private keys in commits** — check `.gitignore`, never commit wallet files
+## Aturan Wajib
 
-## What to work on
+1. **Test dulu** — Tulis test yang gagal sebelum memperbaiki bug atau menambah fitur
+2. **Semua test harus pass** — `python test_all.py` harus `Failed: 0` sebelum PR
+3. **Jangan kompromi keamanan konsensus** — jangan mock consensus untuk membuat test pass
+4. **Jangan commit private key** — periksa `.gitignore`, jangan commit wallet file
+5. **Baca VISION.md dulu** — pahami tujuan proyek sebelum mengusulkan perubahan besar
 
-- See [audit/consensus_audit.md](audit/consensus_audit.md) for known consensus gaps
-- See [audit/security_audit.md](audit/security_audit.md) for security improvements
-- See [docs/THREAT_MODEL.md](docs/THREAT_MODEL.md) for remaining risks
+---
+
+## Area yang Butuh Kontribusi
+
+| Prioritas | Area | Keterangan |
+|-----------|------|------------|
+| 🔴 Tinggi | VPS deployment | Setup node publik |
+| 🔴 Tinggi | AI Worker runtime | Integrasi PyTorch/ONNX |
+| 🟡 Menengah | Explorer UI untuk AI | Tampilkan jobs/workers di browser |
+| 🟡 Menengah | Payment automation | Otomatisasi escrow transaction |
+| 🟢 Rendah | Dokumentasi | Perbaiki atau tambah panduan |
+| 🔬 Research | ZKML | Ikuti perkembangan library ZK |
+
+Lihat juga: [audit/](audit/) untuk daftar bug dan masalah yang sudah teridentifikasi.
+
+---
 
 ## Pull Request
 
-- Branch name: `feature/...` or `fix/...`
-- Keep commits focused — one logical change per commit
-- Describe what you changed and why in the PR description
+- Branch: `feature/...` atau `fix/...`
+- Satu perubahan logis per commit
+- Jelaskan apa yang diubah dan mengapa di deskripsi PR
+- Pastikan tidak ada referensi ke proyek lain yang tidak perlu
 
 ## Code Style
 
-- Python 3.11+, type hints where practical
-- `snake_case` for functions and variables
-- Constants in `coin_params.py` — never hardcode network values
+- Python 3.11+, type hints di mana practical
+- `snake_case` untuk fungsi dan variabel
+- Semua konstanta network di `coin_params.py` — jangan hardcode
+- Baca `docs/VISION.md` untuk memahami arah proyek
